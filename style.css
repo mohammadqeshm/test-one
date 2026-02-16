@@ -202,8 +202,32 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow-y: auto;
     padding-left: 10px;
+    /* Space for scrollbar */
+    max-height: calc(100vh - 280px);
+    /* Adjusted for desktop header + padding */
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+
+/* Custom Scrollbar for Tasks */
+.tasks-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tasks-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.tasks-container::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 10px;
+}
+
+.tasks-container::-webkit-scrollbar-thumb:hover {
+    background: #4f46e5;
 }
 
 .task-card {
@@ -287,17 +311,24 @@ body {
 }
 
 /* Custom Checkbox */
+/* Custom Checkbox */
 .custom-checkbox {
     position: relative;
     width: 25px;
     height: 25px;
+    cursor: pointer;
 }
 
 .custom-checkbox input {
+    position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    margin: 0;
+    top: 0;
+    left: 0;
 }
 
 .checkmark {
@@ -365,12 +396,15 @@ body {
 .progress-circle {
     width: 100%;
     height: 100%;
-    transform: rotate(-90deg);
+    position: relative;
+    /* Ensure container is upright */
 }
 
 .progress-circle svg {
     width: 100%;
     height: 100%;
+    transform: rotate(-90deg);
+    /* Rotate only the SVG for top-start */
 }
 
 .progress-circle circle {
@@ -547,6 +581,23 @@ body {
     opacity: 1 !important;
 }
 
+.btn-edit {
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    opacity: 0;
+}
+
+.task-card:hover .btn-edit {
+    opacity: 0.7;
+}
+
+.btn-edit:hover {
+    color: var(--accent-blue);
+    opacity: 1 !important;
+}
+
 /* Empty state styling */
 .empty-state {
     text-align: center;
@@ -567,4 +618,293 @@ body::after {
     content: "";
     /* Hidden container for SVG gradients */
     display: none;
+}
+
+/* =========================================
+   Mobile Menu Button (hidden on desktop)
+   ========================================= */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar close button (hidden on desktop) */
+.sidebar-close {
+    display: none;
+    justify-content: flex-end;
+    padding: 10px 10px 0 10px;
+}
+
+.sidebar-close button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.sidebar-close button:hover {
+    color: white;
+}
+
+/* Sidebar Overlay (hidden on desktop) */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 99;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* =========================================
+   Tablet (max-width: 1024px)
+   ========================================= */
+@media (max-width: 1024px) {
+    .main-container {
+        width: 98vw;
+        grid-template-columns: 180px 1fr 220px;
+    }
+
+    .task-section {
+        padding: 30px 20px;
+    }
+
+    .progress-section {
+        padding: 30px 15px;
+    }
+
+    .progress-container {
+        width: 170px;
+        height: 170px;
+    }
+
+    .percentage {
+        font-size: 32px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   Mobile (max-width: 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        overflow: hidden;
+        /* Prevent body scroll */
+        padding: 0;
+    }
+
+    .app-background {
+        position: fixed;
+    }
+
+    .main-container {
+        width: 100%;
+        height: 100vh;
+        /* Full viewport height */
+        min-height: 0;
+        border-radius: 0;
+        border: none;
+
+        /* Flex Layout for Mobile */
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+        /* No container scroll */
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+
+    /* Show mobile menu button */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Off-canvas Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 280px;
+        height: 100vh;
+        z-index: 100;
+        background: rgba(7, 9, 18, 0.97);
+        backdrop-filter: blur(40px);
+        border-left: 1px solid var(--glass-border);
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.6);
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 10px 15px 30px 15px;
+    }
+
+    .sidebar.active {
+        right: 0;
+    }
+
+    .sidebar-close {
+        display: flex;
+    }
+
+    /* Task Section - Takes available space */
+    .task-section {
+        padding: 70px 15px 10px 15px;
+        order: 1;
+        flex: 1;
+        /* Grow to fill space */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        /* Contain children */
+    }
+
+    .task-header {
+        gap: 15px;
+        flex-shrink: 0;
+        /* Prevent header from shrinking */
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .header-controls h2 {
+        font-size: 20px;
+    }
+
+    .btn-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Scrollable Task List */
+    .tasks-container {
+        overflow-y: auto;
+        padding-left: 5px;
+        max-height: none;
+        /* Reset desktop style */
+        flex: 1;
+        /* Scroll this area */
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .task-card {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .task-info h3 {
+        font-size: 14px;
+    }
+
+    .task-info p {
+        font-size: 11px;
+    }
+
+    /* Progress Section - Sticky Bottom */
+    .progress-section {
+        order: 2;
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        padding: 15px 20px;
+        flex-shrink: 0;
+        /* Keep fixed size */
+        background: rgba(18, 20, 32, 0.85);
+        /* Proper contrast */
+        backdrop-filter: blur(20px);
+        z-index: 10;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .progress-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .percentage {
+        font-size: 26px;
+    }
+
+    .status {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    /* Modal adjustments */
+    .task-modal {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .flex-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* =========================================
+   Small Mobile (max-width: 480px)
+   ========================================= */
+@media (max-width: 480px) {
+    .task-section {
+        padding: 65px 10px 15px 10px;
+    }
+
+    .task-card {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .nav-item {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .progress-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 15px;
+    }
+
+    .progress-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .percentage {
+        font-size: 22px;
+    }
 }
