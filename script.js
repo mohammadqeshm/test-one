@@ -124,7 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.custom-checkbox input').forEach(input => {
             input.addEventListener('change', (e) => {
                 const idx = e.target.dataset.index;
-                tasks[idx].checked = e.target.checked;
+                const isChecked = e.target.checked;
+                tasks[idx].checked = isChecked;
+
+                // GA4 Event - Track task completion
+                if (isChecked && typeof gtag === 'function') {
+                    gtag('event', 'task_completed', {
+                        'event_category': 'engagement',
+                        'event_label': tasks[idx].category
+                    });
+                }
+
                 saveAndRender();
             });
         });
@@ -133,6 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', (e) => {
                 const idx = e.target.dataset.index;
                 if (confirm('آیا از حذف این کار مطمئن هستید؟')) {
+                    // GA4 Event - Track task deletion (before splicing)
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'task_deleted', {
+                            'event_category': 'engagement',
+                            'event_label': tasks[idx].category
+                        });
+                    }
+
                     tasks.splice(idx, 1);
                     saveAndRender();
                 }
@@ -199,6 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 category,
                 checked: false
             });
+
+            // GA4 Event - Track new task creation
+            if (typeof gtag === 'function') {
+                gtag('event', 'task_created', {
+                    'event_category': 'engagement',
+                    'event_label': category
+                });
+            }
         }
 
         document.getElementById('newTaskTitle').value = '';
