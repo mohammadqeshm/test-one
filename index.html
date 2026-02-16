@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تودو اپ حرفه‌ای | Pro To-Do App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-background"></div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <div class="nav-item active">
+                    <i class="fas fa-briefcase"></i>
+                    <span>کار</span>
+                    <i class="fas fa-chevron-left arrow"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>شخصی</span>
+                    <i class="fas fa-chevron-left arrow"></i>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>خرید</span>
+                    <i class="fas fa-chevron-left arrow"></i>
+                </div>
+            </nav>
+
+            <div class="sidebar-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو">
+            </div>
+        </aside>
+
+        <!-- Task List Area -->
+        <section class="task-section">
+            <header class="task-header">
+                <div class="header-top">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="جستجو">
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <div class="action-buttons">
+                        <button class="btn-icon"><i class="fas fa-plus"></i></button>
+                        <button class="btn-icon"><i class="fas fa-list-ul"></i></button>
+                    </div>
+                    <h2>لیست کارها</h2>
+                </div>
+            </header>
+
+            <div class="tasks-container">
+                <div class="task-card checked blue-theme">
+                    <div class="task-info">
+                        <h3>شروع کار جدید است</h3>
+                        <p>دوشنبه، ۲۷ آذر</p>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" checked>
+                        <span class="checkmark"></span>
+                    </div>
+                </div>
+
+                <div class="task-card checked blue-border">
+                    <div class="task-meta">
+                        <span class="tag blue">۲۷ آذر ۲۷۰۴</span>
+                        <span class="tag gray">شخصی</span>
+                    </div>
+                    <div class="task-content">
+                        <h3>کار موقت و امتحانی</h3>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-card checked purple-border">
+                    <div class="task-meta">
+                        <span class="tag red">۲۰ آذر ۲۹</span>
+                        <span class="tag deep-purple">سرعت</span>
+                    </div>
+                    <div class="task-content">
+                        <h3>شما برای طراحی لایوت</h3>
+                        <p>یکشنبه ۱۲۰۲</p>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-meta">
+                        <span class="tag deep-purple">عمومی</span>
+                        <span class="tag red">۲۵ آذر ۲۷</span>
+                    </div>
+                    <div class="task-content">
+                        <h3>جی پی اس سیستم</h3>
+                        <div class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-info">
+                        <h3>شروع کار جدید است</h3>
+                        <p>پنجشنبه، ۱۲۰۲</p>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-info">
+                        <h3>لیست کارها با فونت</h3>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </div>
+                </div>
+
+                <div class="task-card">
+                    <div class="task-meta">
+                        <span class="tag deep-purple">سرعت</span>
+                        <span class="tag red">۱۵ آذر ۲۹</span>
+                    </div>
+                    <div class="task-content">
+                        <h3>کار شخصی است</h3>
+                        <p>یکشنبه، ۱۲۰۲</p>
+                        <div class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Area -->
+        <section class="progress-section">
+            <div class="date-display">
+                <i class="far fa-calendar-alt"></i>
+                <span>دوشنبه، ۲۷ آذر ۱۴۰۲</span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="fg" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <div class="progress-text">
+                        <span class="percentage">۷۰٪</span>
+                        <span class="status">تکمیل شده</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
